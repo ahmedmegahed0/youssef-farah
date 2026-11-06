@@ -65,7 +65,7 @@ const Hero = ({ onEnter }) => {
                 className="text-xl sm:text-2xl mb-6 tracking-widest font-medium"
                 style={{ color: '#8B6914', fontFamily: "'Amiri', serif", letterSpacing: '0.2em' }}
               >
-                إبراهيم وليلى
+                {weddingData.coupleNames}
               </motion.p>
               <div className="w-48 h-px mx-auto overflow-hidden" style={{ background: 'rgba(201,168,76,0.2)' }}>
                 <motion.div

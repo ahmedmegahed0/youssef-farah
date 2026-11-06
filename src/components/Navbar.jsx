@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { weddingData } from '../data/weddingData';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -68,7 +69,7 @@ const Navbar = () => {
               className="font-amiri text-lg sm:text-xl font-bold cursor-pointer"
               style={{ color: '#C9A84C' }}
             >
-              إبراهيم وليلى
+              {weddingData.coupleNames}
             </button>
 
             {/* Desktop Nav */}
@@ -145,7 +146,7 @@ const Navbar = () => {
             </button>
 
             <div className="font-amiri text-xl mb-8" style={{ color: '#C9A84C' }}>
-              إبراهيم وليلى
+              {weddingData.coupleNames}
             </div>
 
             <div className="flex flex-col gap-1">

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { weddingData } from '../data/weddingData';
 import FloralCorner from './FloralCorner';
 
-const STORAGE_KEY = 'wedding_messages_ibrahim_layla';
+const STORAGE_KEY = 'wedding_messages_youssef_farha';
 
 const GuestMessages = () => {
   const [messages, setMessages] = useState([]);

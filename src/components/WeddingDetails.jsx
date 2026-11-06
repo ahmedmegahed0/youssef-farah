@@ -64,7 +64,7 @@ const WeddingDetails = () => {
     { icon: '📅', label: 'الفرح',     value: weddingData.event.dateFormatted, delay: 0 },
     { icon: '🕗', label: 'الساعة',     value: weddingData.event.time,          delay: 0.12 },
     { icon: '📍', label: 'المكان',    value: weddingData.event.venue,         delay: 0.24 },
-    { icon: '🌿', label: 'يوم الحنة',value: `${weddingData.hennaEvent.dateFormatted} — ${weddingData.hennaEvent.venue}`, delay: 0.36 },
+    ...(weddingData.hennaEvent ? [{ icon: '🌿', label: 'يوم الحنة', value: `${weddingData.hennaEvent.dateFormatted} — ${weddingData.hennaEvent.venue}`, delay: 0.36 }] : []),
   ];
 
   return (
@@ -114,7 +114,7 @@ const WeddingDetails = () => {
         </motion.div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-16">
+        <div className={`grid grid-cols-1 sm:grid-cols-2 ${weddingData.hennaEvent ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-6 sm:gap-8 mb-16`}>
           {cards.map((card, i) => <DetailCard key={i} {...card} />)}
         </div>
 

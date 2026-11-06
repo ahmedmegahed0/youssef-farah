@@ -7,6 +7,7 @@ import Countdown from './components/Countdown';
 import Gallery from './components/Gallery';
 import MemoryFilm from './components/MemoryFilm';
 import RSVP from './components/RSVP';
+import QRCodeSection from './components/QRCodeSection';
 import MusicPlayer from './components/MusicPlayer';
 import Footer from './components/Footer';
 
@@ -32,6 +33,7 @@ function App() {
         <Gallery />
         <MemoryFilm />
         <RSVP />
+        <QRCodeSection onMusicTrigger={handleEnter} />
       </main>
 
       <Footer />

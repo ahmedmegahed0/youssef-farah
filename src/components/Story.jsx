@@ -52,20 +52,31 @@ const Story = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 1 }}
-            className="relative"
+            className="relative max-w-[380px] sm:max-w-[430px] mx-auto w-full"
           >
-            <div className="relative rounded-2xl overflow-hidden"
-              style={{ border: '1px solid rgba(201,168,76,0.3)', boxShadow: '0 0 60px rgba(201,168,76,0.1)' }}
+            <div
+              className="relative rounded-2xl overflow-hidden"
+              style={{
+                border: '1px solid rgba(201,168,76,0.4)',
+                boxShadow: '0 20px 50px -10px rgba(201,168,76,0.2), 0 10px 25px -5px rgba(0,0,0,0.08)',
+              }}
             >
-              <img src={weddingData.story.image}
-                alt="The Couple" className="w-full h-80 sm:h-[450px] object-cover object-top" loading="lazy" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(0deg, rgba(253,251,247,0.4) 0%, transparent 50%)' }} />
+              <img
+                src={weddingData.story.image}
+                alt="The Couple"
+                className="w-full h-auto object-contain block rounded-2xl"
+                loading="lazy"
+              />
             </div>
             {/* Corner accents */}
-            <div className="absolute -top-3 -left-3 w-10 h-10 opacity-60"
-              style={{ borderTop: '2px solid #C9A84C', borderLeft: '2px solid #C9A84C', borderTopLeftRadius: '6px' }} />
-            <div className="absolute -bottom-3 -right-3 w-10 h-10 opacity-60"
-              style={{ borderBottom: '2px solid #C9A84C', borderRight: '2px solid #C9A84C', borderBottomRightRadius: '6px' }} />
+            <div
+              className="absolute -top-3 -left-3 w-10 h-10 opacity-70 pointer-events-none"
+              style={{ borderTop: '2px solid #C9A84C', borderLeft: '2px solid #C9A84C', borderTopLeftRadius: '6px' }}
+            />
+            <div
+              className="absolute -bottom-3 -right-3 w-10 h-10 opacity-70 pointer-events-none"
+              style={{ borderBottom: '2px solid #C9A84C', borderRight: '2px solid #C9A84C', borderBottomRightRadius: '6px' }}
+            />
           </motion.div>
 
           {/* Text */}

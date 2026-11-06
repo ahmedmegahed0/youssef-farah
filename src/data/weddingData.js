@@ -10,22 +10,19 @@ import img7 from '../assets/7.jpeg';
 import img8 from '../assets/8.jpeg';
 import logoImg from '../assets/logo.jpeg';
 export const weddingData = {
-  groom: 'إبراهيم',
-  bride: 'ليلى',
-  coupleNames: 'إبراهيم وليلى',
+  groom: 'يوسف',
+  bride: 'فرحة',
+  coupleNames: 'يوسف وفرحة',
 
   event: {
-    date: new Date('2026-09-30T21:00:00'),
-    dateFormatted: 'الأربعاء، 30 سبتمبر 2026',
-    time: '9:00 مساءً',
-    venue: 'قاعة سوليتير — منوف، المنوفية',
-    mapsUrl: 'https://maps.app.goo.gl/nDWtRY7esALqASew5',
+    date: new Date('2026-11-15T20:00:00'),
+    dateFormatted: 'الأحد، 15 نوفمبر 2026',
+    time: '8:00 مساءً',
+    venue: 'قاعة ايفنتو — شبين الكوم',
+    mapsUrl: 'https://maps.app.goo.gl/RuDFRrebCi5u3zPe9?g_st=iw',
   },
 
-  hennaEvent: {
-    dateFormatted: 'الجمعة، 25 سبتمبر',
-    venue: 'عزبة السلخانة القديمة',
-  },
+  hennaEvent: null,
 
   story: {
     title: 'حكايتنا بدأت هنا...',
@@ -88,8 +85,8 @@ export const weddingData = {
     {
       id: 3,
       name: 'سارة',
-      message: 'من أحلى الأفراح اللي شفتها! ألف مبروك إبراهيم وليلى ✨💍',
-      date: '2026-09-22',
+      message: 'من أحلى الأفراح اللي شفتها! ألف مبروك يوسف وفرحة ✨💍',
+      date: '2026-11-01',
     },
   ],
 
