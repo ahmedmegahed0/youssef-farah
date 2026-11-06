@@ -138,8 +138,8 @@ const Countdown = () => {
             هانت خلاص
           </h2>
           <div className="section-divider" />
-          <p className="mt-6" style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontWeight: 500, fontSize: '1.3rem' }}>
-            لحد ما تبدأ أجمل ليلة في عمرنا
+          <p className="mt-6" style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontWeight: 500, fontSize: 'clamp(1.2rem, 3vw, 1.45rem)' }}>
+            "الأيام بتعدي، بس الليلة دي هتفضل هي النقطة اللي نورت حياتنا وبدأنا بيها حكايتنا سوا ✨"
           </p>
         </motion.div>
 

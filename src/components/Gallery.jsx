@@ -68,9 +68,9 @@ const Gallery = () => {
           <div className="section-divider" />
           <p
             className="mt-6 font-medium max-w-xl mx-auto leading-relaxed"
-            style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontSize: 'clamp(1.15rem, 3vw, 1.35rem)' }}
+            style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontSize: 'clamp(1.15rem, 3vw, 1.4rem)' }}
           >
-            لحظات عشناها سوا وهتفضل محفورة في قلوبنا طول العمر ❤️
+            "الضحكة اللي بنضحكها سوا هي أصدق حاجة حسّيناها.. وعشان كده اخترنا نكمّل العمر كله بيها ❤️"
           </p>
         </motion.div>
 
