@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { weddingData } from '../data/weddingData';
 
@@ -8,14 +8,30 @@ const Gallery = () => {
 
   const openLightbox = (img) => setSelected(img);
   const closeLightbox = () => setSelected(null);
+
   const goPrev = () => {
-    const idx = images.findIndex(i => i.id === selected.id);
+    if (!selected) return;
+    const idx = images.findIndex((i) => i.id === selected.id);
     setSelected(images[(idx - 1 + images.length) % images.length]);
   };
+
   const goNext = () => {
-    const idx = images.findIndex(i => i.id === selected.id);
+    if (!selected) return;
+    const idx = images.findIndex((i) => i.id === selected.id);
     setSelected(images[(idx + 1) % images.length]);
   };
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!selected) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selected]);
 
   return (
     <section
@@ -23,20 +39,20 @@ const Gallery = () => {
       className="relative py-28 sm:py-36 overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #E8DFCA 0%, #F2ECD9 50%, #E8DFCA 100%)' }}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.9 }}
-          className="text-center mb-20 sm:mb-24"
+          className="text-center mb-16 sm:mb-20"
         >
-          <p className="text-sm uppercase tracking-[0.3em] mb-5" style={{ color: '#8B6914', fontWeight: 600 }}>
-            ✦ ذكرياتنا ✦
+          <p className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: '#8B6914', fontWeight: 700 }}>
+            ✦ ألبوم الذكريات ✦
           </p>
           <h2
-            className="mb-5"
+            className="mb-4"
             style={{
               fontFamily: "'Amiri', serif",
               fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
@@ -50,144 +66,151 @@ const Gallery = () => {
             لحظات من حكايتنا
           </h2>
           <div className="section-divider" />
-          <p className="mt-6 font-medium" style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontSize: '1.3rem' }}>
-            لحظات عشناها سوا وهتفضل محفورة في قلوبنا طول العمر
+          <p
+            className="mt-6 font-medium max-w-xl mx-auto leading-relaxed"
+            style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontSize: 'clamp(1.15rem, 3vw, 1.35rem)' }}
+          >
+            لحظات عشناها سوا وهتفضل محفورة في قلوبنا طول العمر ❤️
           </p>
         </motion.div>
 
-        {/* Desktop featured layout */}
-        <div className="hidden md:grid grid-cols-12 gap-4 mb-4">
-          {/* Featured */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-            className="col-span-7 relative group cursor-pointer overflow-hidden rounded-2xl"
-            style={{ height: '480px', border: '1px solid rgba(201,168,76,0.2)' }}
-            onClick={() => openLightbox(images[0])}
-          >
-            <img src={images[0].placeholder} alt={images[0].alt}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-              style={{ background: 'rgba(201,168,76,0.06)' }} />
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center backdrop-blur-sm"
-                style={{ background: 'rgba(201,168,76,0.2)', border: '1px solid rgba(201,168,76,0.5)' }}>
-                <span className="text-2xl">🔍</span>
-              </div>
-            </div>
-            <div className="absolute bottom-4 left-4 text-sm px-3 py-1 rounded-full font-medium"
-              style={{ background: 'rgba(255,255,255,0.9)', color: '#8B6914', border: '1px solid rgba(201,168,76,0.3)', backdropFilter: 'blur(5px)' }}>
-              {images[0].alt}
-            </div>
-          </motion.div>
+        {/* Gallery Grid - Responsive & Displays EVERY SINGLE PHOTO */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+          {images.map((img, i) => {
+            // Give the 1st photo and 7th photo a featured span on large screens for an aesthetic bento look
+            const isFeatured = i === 0 || i === 6;
 
-          {/* Right col */}
-          <div className="col-span-5 grid grid-rows-2 gap-4" style={{ height: '480px' }}>
-            {[images[1], images[2]].map((img, i) => (
-              <motion.div key={img.id}
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.15 }}
-                className="relative group cursor-pointer overflow-hidden rounded-2xl"
-                style={{ border: '1px solid rgba(201,168,76,0.2)', height: '228px' }}
+            return (
+              <motion.div
+                key={img.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.7, delay: (i % 4) * 0.08 }}
                 onClick={() => openLightbox(img)}
+                className={`relative group cursor-pointer overflow-hidden rounded-2xl ${
+                  isFeatured ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'
+                }`}
+                style={{
+                  minHeight: isFeatured ? '360px' : '220px',
+                  maxHeight: isFeatured ? '500px' : '260px',
+                  border: '1px solid rgba(201,168,76,0.35)',
+                  boxShadow: '0 8px 25px -8px rgba(0,0,0,0.1)',
+                }}
               >
-                <img src={img.placeholder} alt={img.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-                  style={{ background: 'rgba(201,168,76,0.06)' }} />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                  <span className="text-3xl">🔍</span>
+                <img
+                  src={img.placeholder}
+                  alt={img.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                  loading="lazy"
+                />
+
+                {/* Golden gradient overlay on hover */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(201,168,76,0.1) 0%, rgba(0,0,0,0.45) 100%)',
+                  }}
+                />
+
+                {/* Magnifier glass indicator */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-md shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-300"
+                    style={{ background: 'rgba(255,255,255,0.85)', border: '1px solid rgba(201,168,76,0.5)' }}
+                  >
+                    <span className="text-xl">🔍</span>
+                  </div>
+                </div>
+
+                {/* Photo Tag */}
+                <div
+                  className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 text-xs sm:text-sm px-3 py-1 rounded-full font-semibold shadow-md pointer-events-none transition-transform duration-300 group-hover:-translate-y-1"
+                  style={{
+                    background: 'rgba(255,255,255,0.92)',
+                    color: '#8B6914',
+                    border: '1px solid rgba(201,168,76,0.3)',
+                    backdropFilter: 'blur(6px)',
+                  }}
+                >
+                  {img.alt}
                 </div>
               </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom row */}
-        <div className="hidden md:grid grid-cols-3 gap-4">
-          {[images[3], images[4], images[5]].map((img, i) => (
-            <motion.div key={img.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="relative group cursor-pointer overflow-hidden rounded-2xl"
-              style={{ height: '240px', border: '1px solid rgba(201,168,76,0.2)' }}
-              onClick={() => openLightbox(img)}
-            >
-              <img src={img.placeholder} alt={img.alt}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-                style={{ background: 'rgba(201,168,76,0.06)' }} />
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-                <span className="text-3xl">🔍</span>
-              </div>
-              <div className="absolute bottom-3 left-3 text-xs px-2 py-1 rounded-full font-medium"
-                style={{ background: 'rgba(255,255,255,0.9)', color: '#8B6914', backdropFilter: 'blur(5px)' }}>{img.alt}</div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Mobile carousel */}
-        <div className="md:hidden">
-          <div className="overflow-x-auto flex gap-4 pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: 'none' }}>
-            {images.map((img, i) => (
-              <motion.div key={img.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="flex-none snap-center relative cursor-pointer overflow-hidden rounded-2xl"
-                style={{ width: '80vw', height: '260px', border: '1px solid rgba(201,168,76,0.2)' }}
-                onClick={() => openLightbox(img)}
-              >
-                <img src={img.placeholder} alt={img.alt}
-                  className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute bottom-3 left-3 text-xs px-2 py-1 rounded-full font-medium"
-                  style={{ background: 'rgba(255,255,255,0.9)', color: '#8B6914', backdropFilter: 'blur(5px)' }}>{img.alt}</div>
-              </motion.div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox Modal */}
       <AnimatePresence>
         {selected && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[10000] flex items-center justify-center p-4"
-            style={{ background: 'rgba(255,255,255,0.95)' }}
+            className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm"
             onClick={closeLightbox}
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={e => e.stopPropagation()}
-              className="relative max-w-5xl w-full"
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-5xl w-full flex flex-col items-center"
             >
-              <img src={selected.placeholder} alt={selected.alt}
-                className="w-full max-h-[85vh] object-contain rounded-xl"
-                style={{ border: '1px solid rgba(201,168,76,0.3)' }} />
-              <button onClick={closeLightbox}
-                className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center text-sm cursor-pointer shadow-lg hover:scale-110 transition-transform"
-                style={{ background: 'rgba(255,255,255,0.9)', color: '#8B6914', border: '1px solid rgba(201,168,76,0.5)' }}>✕</button>
-              <button onClick={goPrev}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-xl cursor-pointer shadow-lg hover:scale-110 transition-transform"
-                style={{ background: 'rgba(255,255,255,0.9)', color: '#8B6914', border: '1px solid rgba(201,168,76,0.5)' }}>‹</button>
-              <button onClick={goNext}
-                className="absolute right-14 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-xl cursor-pointer shadow-lg hover:scale-110 transition-transform"
-                style={{ background: 'rgba(255,255,255,0.9)', color: '#8B6914', border: '1px solid rgba(201,168,76,0.5)' }}>›</button>
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-sm px-4 py-2 rounded-full font-medium shadow-lg"
-                style={{ background: 'rgba(255,255,255,0.9)', color: '#8B6914', border: '1px solid rgba(201,168,76,0.3)' }}>{selected.alt}</div>
+              <div
+                className="relative rounded-2xl overflow-hidden shadow-2xl max-h-[80vh] flex items-center justify-center"
+                style={{ border: '2px solid rgba(201,168,76,0.5)' }}
+              >
+                <img
+                  src={selected.placeholder}
+                  alt={selected.alt}
+                  className="w-auto h-auto max-h-[80vh] max-w-full object-contain block rounded-2xl"
+                />
+              </div>
+
+              {/* Top Controls: Close & Counter */}
+              <div className="absolute -top-12 left-0 right-0 flex items-center justify-between px-2 text-white">
+                <span className="text-sm font-semibold tracking-wide text-neutral-300">
+                  {images.findIndex((i) => i.id === selected.id) + 1} / {images.length}
+                </span>
+                <button
+                  onClick={closeLightbox}
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-lg cursor-pointer bg-white/20 hover:bg-white/40 text-white transition-colors"
+                  aria-label="إغلاق"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Nav Arrows */}
+              <button
+                onClick={goPrev}
+                className="absolute left-2 sm:-left-14 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center text-2xl cursor-pointer bg-white/80 hover:bg-white text-[#8B6914] shadow-xl hover:scale-110 transition-transform"
+                aria-label="السابق"
+              >
+                ‹
+              </button>
+              <button
+                onClick={goNext}
+                className="absolute right-2 sm:-right-14 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center text-2xl cursor-pointer bg-white/80 hover:bg-white text-[#8B6914] shadow-xl hover:scale-110 transition-transform"
+                aria-label="التالي"
+              >
+                ›
+              </button>
+
+              {/* Bottom Caption */}
+              <div
+                className="mt-4 text-sm sm:text-base px-6 py-2 rounded-full font-bold shadow-xl"
+                style={{
+                  background: 'rgba(255,255,255,0.95)',
+                  color: '#8B6914',
+                  border: '1px solid rgba(201,168,76,0.5)',
+                }}
+              >
+                {selected.alt}
+              </div>
             </motion.div>
           </motion.div>
         )}

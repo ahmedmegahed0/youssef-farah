@@ -4,7 +4,7 @@ import { weddingData } from '../data/weddingData';
 
 // duplicate once for seamless infinite loop
 const row1 = [...weddingData.gallery, ...weddingData.gallery];
-const row2 = [...weddingData.gallery, ...weddingData.gallery];
+const row2 = [...weddingData.gallery].reverse().concat([...weddingData.gallery].reverse());
 
 const FilmFrame = ({ img, size = 'md' }) => {
   const dims =

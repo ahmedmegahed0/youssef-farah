@@ -52,7 +52,7 @@ const Story = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 1 }}
-            className="relative max-w-[380px] sm:max-w-[430px] mx-auto w-full"
+            className="relative mx-auto w-fit"
           >
             <div
               className="relative rounded-2xl overflow-hidden"
@@ -64,7 +64,7 @@ const Story = () => {
               <img
                 src={weddingData.story.image}
                 alt="The Couple"
-                className="w-full h-auto object-contain block rounded-2xl"
+                className="w-auto h-auto max-h-[440px] sm:max-h-[490px] max-w-[270px] sm:max-w-[310px] object-contain block rounded-2xl"
                 loading="lazy"
               />
             </div>

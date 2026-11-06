@@ -8,6 +8,7 @@ import img5 from '../assets/5.jpeg';
 import img6 from '../assets/6.jpeg';
 import img7 from '../assets/7.jpeg';
 import img8 from '../assets/8.jpeg';
+import img9 from '../assets/9.jpeg';
 import logoImg from '../assets/logo.jpeg';
 export const weddingData = {
   groom: 'يوسف',
@@ -63,10 +64,11 @@ export const weddingData = {
     { id: 3, alt: 'لحظات حلوة',       placeholder: img3 },
     { id: 4, alt: 'قصة حب',         placeholder: img4 },
     { id: 5, alt: 'فرحة العمر',        placeholder: img5 },
-    { id: 6, alt: 'ليلة العمر',  placeholder: img6 },
-    { id: 7, alt: 'ذكريات جميلة',   placeholder: img7 },
+    { id: 6, alt: 'ليلة العمر',       placeholder: img6 },
+    { id: 7, alt: 'ذكريات جميلة',    placeholder: img7 },
     { id: 8, alt: 'لحد آخر العمر',   placeholder: img8 },
-    { id: 9, alt: 'يومنا المميز',      placeholder: logoImg },
+    { id: 9, alt: 'أجمل حكاية',      placeholder: img9 },
+    { id: 10, alt: 'يومنا المميز',     placeholder: logoImg },
   ],
 
   initialMessages: [
