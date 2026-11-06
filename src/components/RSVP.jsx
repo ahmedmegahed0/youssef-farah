@@ -3,11 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import FloralCorner from './FloralCorner';
 
 const RSVP_KEY = 'wedding_rsvp_youssef_farha';
+const RSVP_PHONE = '201091239073';
 
 const RSVP = () => {
   const [form, setForm] = useState({ name: '', guests: '1', attendance: '', message: '' });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [lastWaUrl, setLastWaUrl] = useState('');
 
   const validate = () => {
     const e = {};
@@ -21,28 +23,27 @@ const RSVP = () => {
     const errs = validate();
     if (Object.keys(errs).length) { setErrors(errs); return; }
     
-    // Save locally (optional, but keeps the old logic)
-    const existing = JSON.parse(localStorage.getItem(RSVP_KEY) || '[]');
-    existing.push({ ...form, submittedAt: new Date().toISOString() });
-    localStorage.setItem(RSVP_KEY, JSON.stringify(existing));
+    // 1. Save locally
+    try {
+      const existing = JSON.parse(localStorage.getItem(RSVP_KEY) || '[]');
+      existing.push({ ...form, submittedAt: new Date().toISOString() });
+      localStorage.setItem(RSVP_KEY, JSON.stringify(existing));
+    } catch (err) {
+      console.warn('LocalStorage error:', err);
+    }
 
-    // Send email using FormSubmit.co
-    fetch('https://formsubmit.co/ajax/ahmedmegahed580@gmail.com', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        Name: form.name,
-        Guests: form.guests,
-        Attendance: form.attendance === 'yes' ? 'Attending' : 'Not Attending',
-        Message: form.message || 'No additional message'
-      })
-    })
-    .then(response => response.json())
-    .then(data => console.log('Email sent successfully', data))
-    .catch(error => console.error('Error sending email:', error));
+    // 2. Format WhatsApp message
+    const attendanceText = form.attendance === 'yes' ? 'أكيد هنيجي بكل حب ❤️' : 'للأسف مش هقدر أحضر 🙏';
+    const guestsCount = form.attendance === 'yes' ? `\n👥 *عدد الحاضرين:* ${form.guests}` : '';
+    const messageText = form.message.trim() ? `\n💬 *رسالة للعروسين:* "${form.message.trim()}"` : '';
+
+    const waMessage = `✨ *تأكيد حضور لحفل زفاف يوسف وفرحة* ✨\n\n👤 *الاسم:* ${form.name.trim()}\n💌 *حالة الحضور:* ${attendanceText}${guestsCount}${messageText}\n\nنراكم على خير وفرح وسعادة إن شاء الله 💍🤍`;
+
+    const waUrl = `https://wa.me/${RSVP_PHONE}?text=${encodeURIComponent(waMessage)}`;
+    setLastWaUrl(waUrl);
+
+    // 3. Open WhatsApp directly
+    window.open(waUrl, '_blank');
 
     setSubmitted(true);
   };
@@ -120,6 +121,20 @@ const RSVP = () => {
                   ? `فرحتنا مش هتكمل غير بيكم${form.guests > 1 ? ` وبكل اللي جايين معاكم (${parseInt(form.guests) - 1})` : ''} ✨`
                   : 'هتفضلوا في قلوبنا، حتى لو مش هتقدروا تكونوا موجودين ❤️'}
               </p>
+
+              {lastWaUrl && (
+                <div className="mt-6">
+                  <a
+                    href={lastWaUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-gold inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-base font-bold shadow-md hover:scale-105 transition-transform"
+                  >
+                    <span>إرسال التأكيد عبر واتساب 💬</span>
+                  </a>
+                </div>
+              )}
+
               <div className="mt-8 flex items-center justify-center gap-2">
                 {[...Array(5)].map((_, i) => (
                   <motion.span key={i} animate={{ y: [0, -10, 0] }} transition={{ delay: i * 0.1, duration: 1, repeat: Infinity }} className="text-xl">✨</motion.span>
