@@ -47,3 +47,4 @@ const QuoteBanner = ({ text, subtext, highlight }) => (
 );
 
 export default QuoteBanner;
+
