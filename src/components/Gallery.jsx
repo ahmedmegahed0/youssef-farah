@@ -37,7 +37,7 @@ const Gallery = () => {
     <section
       id="gallery"
       className="relative py-28 sm:py-36 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, #E8DFCA 0%, #F2ECD9 50%, #E8DFCA 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #FAF9F5 0%, #F3EFE8 50%, #FAF9F5 100%)' }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -48,7 +48,7 @@ const Gallery = () => {
           transition={{ duration: 0.9 }}
           className="text-center mb-16 sm:mb-20"
         >
-          <p className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: '#8B6914', fontWeight: 700 }}>
+          <p className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: '#7A602B', fontWeight: 700 }}>
             ✦ ألبوم الذكريات ✦
           </p>
           <h2
@@ -57,7 +57,7 @@ const Gallery = () => {
               fontFamily: "'Amiri', serif",
               fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
               fontWeight: 300,
-              background: 'linear-gradient(135deg, #C9A84C, #F0D98C, #C9A84C)',
+              background: 'linear-gradient(135deg, #7A602B, #BFA267, #E8D5A3)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -68,7 +68,7 @@ const Gallery = () => {
           <div className="section-divider" />
           <p
             className="mt-6 font-medium max-w-xl mx-auto leading-relaxed"
-            style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontSize: 'clamp(1.15rem, 3vw, 1.35rem)' }}
+            style={{ fontFamily: "'Amiri', serif", color: '#444444', fontStyle: 'italic', fontSize: 'clamp(1.15rem, 3vw, 1.35rem)' }}
           >
             لحظات عشناها سوا وهتفضل محفورة في قلوبنا طول العمر ❤️
           </p>
@@ -94,8 +94,8 @@ const Gallery = () => {
                 style={{
                   minHeight: isFeatured ? '360px' : '220px',
                   maxHeight: isFeatured ? '500px' : '260px',
-                  border: '1px solid rgba(201,168,76,0.35)',
-                  boxShadow: '0 8px 25px -8px rgba(0,0,0,0.1)',
+                  border: '1px solid rgba(191,162,103,0.3)',
+                  boxShadow: '0 8px 25px -8px rgba(0,0,0,0.06)',
                 }}
               >
                 <img
@@ -109,7 +109,7 @@ const Gallery = () => {
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                   style={{
-                    background: 'linear-gradient(180deg, rgba(201,168,76,0.1) 0%, rgba(0,0,0,0.45) 100%)',
+                    background: 'linear-gradient(180deg, rgba(191,162,103,0.1) 0%, rgba(0,0,0,0.45) 100%)',
                   }}
                 />
 
@@ -117,7 +117,7 @@ const Gallery = () => {
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                   <div
                     className="w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-md shadow-lg transform scale-75 group-hover:scale-100 transition-transform duration-300"
-                    style={{ background: 'rgba(255,255,255,0.85)', border: '1px solid rgba(201,168,76,0.5)' }}
+                    style={{ background: 'rgba(255,255,255,0.88)', border: '1px solid rgba(191,162,103,0.45)' }}
                   >
                     <span className="text-xl">🔍</span>
                   </div>
@@ -128,8 +128,8 @@ const Gallery = () => {
                   className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 text-xs sm:text-sm px-3 py-1 rounded-full font-semibold shadow-md pointer-events-none transition-transform duration-300 group-hover:-translate-y-1"
                   style={{
                     background: 'rgba(255,255,255,0.92)',
-                    color: '#8B6914',
-                    border: '1px solid rgba(201,168,76,0.3)',
+                    color: '#7A602B',
+                    border: '1px solid rgba(191,162,103,0.25)',
                     backdropFilter: 'blur(6px)',
                   }}
                 >

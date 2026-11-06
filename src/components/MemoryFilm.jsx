@@ -61,7 +61,7 @@ const FilmFrame = ({ img, size = 'md' }) => {
 const Perforations = () => (
   <div
     className="flex items-center gap-3 px-2 py-1"
-    style={{ background: '#EBE5D9', overflow: 'hidden' }}
+    style={{ background: '#EAE5DB', overflow: 'hidden' }}
   >
     {Array.from({ length: 80 }).map((_, i) => (
       <div
@@ -70,8 +70,8 @@ const Perforations = () => (
         style={{
           width: '22px',
           height: '12px',
-          background: '#FDFBF7',
-          border: '1px solid rgba(201,168,76,0.2)',
+          background: '#FAF9F5',
+          border: '1px solid rgba(191,162,103,0.2)',
           flexShrink: 0,
         }}
       />
@@ -83,7 +83,7 @@ const MemoryFilm = () => {
   return (
     <section
       className="relative py-20 overflow-hidden"
-      style={{ background: '#F2ECD9' }}
+      style={{ background: '#FAF9F5' }}
     >
       {/* ── header ── */}
       <motion.div
@@ -95,7 +95,7 @@ const MemoryFilm = () => {
       >
         <p
           className="font-cairo text-sm uppercase tracking-widest mb-2"
-          style={{ color: '#8B6914', fontWeight: 700 }}
+          style={{ color: '#7A602B', fontWeight: 700 }}
         >
           ✦ شريط الذكريات ✦
         </p>
@@ -105,7 +105,7 @@ const MemoryFilm = () => {
             fontSize: 'clamp(1.6rem, 4vw, 2.8rem)',
             fontFamily: "'Amiri', serif",
             fontWeight: 300,
-            background: 'linear-gradient(135deg, #C9A84C, #F0D98C, #C9A84C)',
+            background: 'linear-gradient(135deg, #7A602B, #BFA267, #E8D5A3)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -121,13 +121,13 @@ const MemoryFilm = () => {
 
         {/* ROW 1 — moves RIGHT → LEFT */}
         <div
-          style={{ background: '#EBE5D9', overflow: 'hidden', padding: '12px 0' }}
+          style={{ background: '#F3EFE8', overflow: 'hidden', padding: '12px 0' }}
         >
           <motion.div
             className="flex gap-4 items-center"
             style={{ width: 'max-content', willChange: 'transform' }}
             animate={{ x: [0, '-50%'] }}
-            transition={{ repeat: Infinity, ease: 'linear', duration: 30 }}
+            transition={{ repeat: Infinity, ease: 'linear', duration: 32 }}
           >
             {row1.map((img, i) => (
               <FilmFrame key={`r1-${i}`} img={img} size={i % 3 === 0 ? 'lg' : 'md'} />
@@ -137,13 +137,13 @@ const MemoryFilm = () => {
 
         {/* ROW 2 — moves LEFT → RIGHT (opposite) */}
         <div
-          style={{ background: '#EBE5D9', overflow: 'hidden', padding: '12px 0' }}
+          style={{ background: '#F3EFE8', overflow: 'hidden', padding: '12px 0' }}
         >
           <motion.div
             className="flex gap-4 items-center"
             style={{ width: 'max-content', willChange: 'transform' }}
             animate={{ x: ['-50%', 0] }}
-            transition={{ repeat: Infinity, ease: 'linear', duration: 36 }}
+            transition={{ repeat: Infinity, ease: 'linear', duration: 38 }}
           >
             {row2.map((img, i) => (
               <FilmFrame key={`r2-${i}`} img={img} size={i % 4 === 1 ? 'lg' : 'md'} />
@@ -155,12 +155,12 @@ const MemoryFilm = () => {
 
         {/* side fade gradients */}
         <div
-          className="absolute inset-y-0 right-0 w-20 pointer-events-none z-10"
-          style={{ background: 'linear-gradient(270deg, #F2ECD9, transparent)' }}
+          className="absolute inset-y-0 right-0 w-24 pointer-events-none z-10"
+          style={{ background: 'linear-gradient(270deg, #FAF9F5, transparent)' }}
         />
         <div
-          className="absolute inset-y-0 left-0 w-20 pointer-events-none z-10"
-          style={{ background: 'linear-gradient(90deg, #F2ECD9, transparent)' }}
+          className="absolute inset-y-0 left-0 w-24 pointer-events-none z-10"
+          style={{ background: 'linear-gradient(90deg, #FAF9F5, transparent)' }}
         />
       </div>
     </section>
