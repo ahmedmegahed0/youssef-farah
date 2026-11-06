@@ -5,10 +5,10 @@ import { weddingData } from '../data/weddingData';
 const Footer = () => (
   <footer
     className="relative py-24 overflow-hidden"
-    style={{ background: 'linear-gradient(180deg, #FAF9F5 0%, #F0EBE1 100%)', borderTop: '1px solid rgba(191,162,103,0.2)' }}
+    style={{ background: 'linear-gradient(180deg, #F2ECD9 0%, #E8DFCA 100%)', borderTop: '1px solid rgba(201,168,76,0.3)' }}
   >
     <div className="absolute inset-0"
-      style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(191,162,103,0.04) 0%, transparent 70%)' }} />
+      style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 70%)' }} />
 
     <div className="max-w-2xl mx-auto px-6 text-center relative z-10">
       {/* Ornamental divider */}
@@ -19,11 +19,11 @@ const Footer = () => (
         transition={{ duration: 1 }}
         className="flex items-center justify-center gap-4 mb-12"
       >
-        <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(191,162,103,0.35))' }} />
-        <span className="text-xl" style={{ color: '#BFA267' }}>✦</span>
-        <span className="text-xs uppercase tracking-[0.3em]" style={{ color: '#7A602B' }}>أجمل ليلة في العمر</span>
-        <span className="text-xl" style={{ color: '#BFA267' }}>✦</span>
-        <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(191,162,103,0.35), transparent)' }} />
+        <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.35))' }} />
+        <span className="text-xl" style={{ color: '#C9A84C' }}>✦</span>
+        <span className="text-xs uppercase tracking-[0.3em]" style={{ color: '#8B6914', fontWeight: 700 }}>أجمل ليلة في العمر</span>
+        <span className="text-xl" style={{ color: '#C9A84C' }}>✦</span>
+        <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, rgba(201,168,76,0.35), transparent)' }} />
       </motion.div>
 
       {/* Couple names */}
@@ -37,7 +37,7 @@ const Footer = () => (
           fontFamily: "'Amiri', serif",
           fontSize: 'clamp(2.5rem, 8vw, 5rem)',
           fontWeight: 300,
-          background: 'linear-gradient(135deg, #7A602B 0%, #BFA267 30%, #E8D5A3 50%, #BFA267 70%, #7A602B 100%)',
+          background: 'linear-gradient(135deg, #5C4409 0%, #8B6914 25%, #C9A84C 50%, #8B6914 75%, #5C4409 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
@@ -53,7 +53,7 @@ const Footer = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.9, delay: 0.2 }}
         className="mb-10 leading-relaxed font-medium"
-        style={{ fontFamily: "'Amiri', serif", color: '#444444', fontStyle: 'italic', fontSize: 'clamp(1.2rem, 3vw, 1.5rem)' }}
+        style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontSize: 'clamp(1.2rem, 3vw, 1.5rem)' }}
       >
         "حكايتنا بدأت — ونفسنا تبقوا معانا عشان تكمل"
       </motion.p>
@@ -65,9 +65,9 @@ const Footer = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.3 }}
         className="inline-flex items-center gap-3 px-6 py-2 rounded-full mb-12 shadow-sm"
-        style={{ border: '1px solid rgba(191,162,103,0.25)', background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(10px)' }}
+        style={{ border: '1px solid rgba(201,168,76,0.35)', background: 'rgba(255,255,255,0.75)', backdropFilter: 'blur(10px)' }}
       >
-        <span className="text-base font-semibold" style={{ color: '#7A602B' }}>{weddingData.event.dateFormatted}</span>
+        <span className="text-base font-semibold" style={{ color: '#8B6914' }}>{weddingData.event.dateFormatted}</span>
       </motion.div>
 
       {/* Heart & Ad */}
@@ -76,7 +76,7 @@ const Footer = () => (
           animate={{ scale: [1, 1.15, 1] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
           className="text-4xl mb-12"
-          style={{ color: 'rgba(191,162,103,0.45)' }}
+          style={{ color: 'rgba(201,168,76,0.5)' }}
         >
           ♥
         </motion.div>
@@ -85,20 +85,20 @@ const Footer = () => (
         <div 
           className="mt-8 p-8 sm:p-9 rounded-3xl mx-auto max-w-lg relative group" 
           style={{ 
-            background: 'rgba(255, 255, 255, 0.75)', 
-            border: '1px solid rgba(255, 255, 255, 0.9)', 
+            background: 'rgba(255, 255, 255, 0.82)', 
+            border: '1px solid rgba(201, 168, 76, 0.35)', 
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            boxShadow: '0 15px 35px -10px rgba(191,162,103,0.12)'
+            boxShadow: '0 15px 35px -10px rgba(201,168,76,0.18)'
           }}
         >
           <div className="absolute inset-0 rounded-3xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"
-            style={{ background: 'radial-gradient(circle at 50% 50%, rgba(191,162,103,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
+            style={{ background: 'radial-gradient(circle at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
           
-          <h3 className="text-xl sm:text-2xl mb-3 font-bold" style={{ fontFamily: "'Amiri', serif", color: '#7A602B' }}>
+          <h3 className="text-xl sm:text-2xl mb-3 font-bold" style={{ fontFamily: "'Amiri', serif", color: '#8B6914' }}>
             اعمل دعوة فرحك زيهم ✨
           </h3>
-          <p className="text-sm mb-4 leading-relaxed" style={{ color: '#444444' }} dir="rtl">
+          <p className="text-sm mb-4 leading-relaxed" style={{ color: '#2C2C2C' }} dir="rtl">
             لو عجبك التصميم وعايز تعمل إنفيتيشن زي دي لخطوبتك، فرحك، أو أي مناسبة، تقدر تكلمنا دلوقتي على:
           </p>
           
@@ -108,19 +108,19 @@ const Footer = () => (
               target="_blank"
               rel="noreferrer"
               className="text-2xl sm:text-3xl inline-block font-bold hover:scale-105 transition-transform relative z-10 cursor-pointer" 
-              style={{ color: '#7A602B', textDecoration: 'none', textShadow: '0 0 15px rgba(191,162,103,0.2)' }}
+              style={{ color: '#8B6914', textDecoration: 'none', textShadow: '0 0 15px rgba(201,168,76,0.25)' }}
             >
               01067688524
             </a>
             <div 
               className="text-lg sm:text-xl font-bold mt-1.5" 
-              style={{ fontFamily: "'Amiri', serif", color: '#7A602B' }}
+              style={{ fontFamily: "'Amiri', serif", color: '#8B6914' }}
             >
               أحمد مجاهد
             </div>
           </div>
           
-          <div className="flex justify-center items-center gap-6 mt-2 pt-6 relative z-10" style={{ borderTop: '1px dashed rgba(191,162,103,0.25)' }}>
+          <div className="flex justify-center items-center gap-6 mt-2 pt-6 relative z-10" style={{ borderTop: '1px dashed rgba(201,168,76,0.35)' }}>
             {/* WhatsApp */}
             <a
               href="https://wa.me/201067688524?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D9%83%D9%86%D8%AA%20%D8%AD%D8%A7%D8%A8%D8%A8%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%AF%D8%B9%D9%88%D8%A9%20%D9%81%D8%B1%D8%AD%20%D8%A5%D9%84%D9%83%D8%AA%D8%B1%D9%88%D9%86%D9%8A%D8%A9"

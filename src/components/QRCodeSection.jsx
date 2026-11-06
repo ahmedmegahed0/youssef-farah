@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { QRCodeCanvas } from 'qrcode.react';
 import { weddingData } from '../data/weddingData';
@@ -6,22 +6,21 @@ import FloralCorner from './FloralCorner';
 
 const QRCodeSection = ({ onMusicTrigger }) => {
   const [showModal, setShowModal] = useState(false);
-  const [qrMode, setQrMode] = useState('url'); // 'url' | 'text'
   const [copied, setCopied] = useState(false);
-  const qrCanvasRef = useRef(null);
+  const [qrMode, setQrMode] = useState('url'); // 'url' or 'text'
 
-  // Generate dynamic URL for the invitation
+  // The deployed invitation URL
   const [inviteUrl, setInviteUrl] = useState('https://youssef-farah.vercel.app/?invite=vip');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const origin = window.location.origin;
-      const pathname = window.location.pathname;
-      setInviteUrl(`${origin}${pathname}?invite=vip`);
+      const url = new URL(window.location.href);
+      url.searchParams.set('invite', 'vip');
+      setInviteUrl(url.toString());
 
-      // Check if URL contains ?invite=vip or #invite
+      // If already opened via QR scan (?invite=vip), trigger VIP welcome
       const params = new URLSearchParams(window.location.search);
-      if (params.get('invite') === 'vip' || window.location.hash === '#invite') {
+      if (params.get('invite') === 'vip') {
         setShowModal(true);
       }
     }
@@ -46,26 +45,26 @@ const QRCodeSection = ({ onMusicTrigger }) => {
 
     // Background gradient
     const grad = ctx.createLinearGradient(0, 0, 0, exportCanvas.height);
-    grad.addColorStop(0, '#FAF9F5');
-    grad.addColorStop(1, '#F0EBE1');
+    grad.addColorStop(0, '#F2ECD9');
+    grad.addColorStop(1, '#E8DFCA');
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
 
     // Golden frame border
-    ctx.strokeStyle = '#BFA267';
+    ctx.strokeStyle = '#C9A84C';
     ctx.lineWidth = 3;
     ctx.strokeRect(20, 20, exportCanvas.width - 40, exportCanvas.height - 40);
 
     // Inner dashed line
     ctx.setLineDash([8, 6]);
-    ctx.strokeStyle = 'rgba(191,162,103,0.4)';
+    ctx.strokeStyle = 'rgba(201,168,76,0.4)';
     ctx.lineWidth = 1.2;
     ctx.strokeRect(30, 30, exportCanvas.width - 60, exportCanvas.height - 60);
     ctx.setLineDash([]);
 
     // Header text
     ctx.textAlign = 'center';
-    ctx.fillStyle = '#7A602B';
+    ctx.fillStyle = '#8B6914';
     ctx.font = 'bold 36px "Amiri", serif';
     ctx.fillText(`دعوة فرح ${weddingData.coupleNames}`, size / 2, 75);
 
@@ -85,7 +84,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
 
     // Footer info
     ctx.font = 'bold 22px "Cairo", sans-serif';
-    ctx.fillStyle = '#7A602B';
+    ctx.fillStyle = '#8B6914';
     ctx.fillText(`${weddingData.event.dateFormatted} — ${weddingData.event.time}`, size / 2, qrY + qrSize + 55);
 
     ctx.font = '18px "Cairo", sans-serif';
@@ -121,12 +120,12 @@ const QRCodeSection = ({ onMusicTrigger }) => {
       <section
         id="qrcode"
         className="relative py-24 sm:py-32 overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #F3EFE8 0%, #FAF9F5 50%, #F3EFE8 100%)' }}
+        style={{ background: 'linear-gradient(180deg, #E8DFCA 0%, #F2ECD9 50%, #E8DFCA 100%)' }}
       >
         {/* Subtle decorative glow */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(circle at 50% 50%, rgba(191,162,103,0.06) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%)' }}
         />
 
         <div className="max-w-4xl mx-auto px-6 sm:px-10 relative z-10">
@@ -138,7 +137,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <p className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: '#7A602B', fontWeight: 700 }}>
+            <p className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: '#8B6914', fontWeight: 700 }}>
               ✦ بطاقة الدعوة الرقمية ✦
             </p>
             <h2
@@ -147,7 +146,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
                 fontFamily: "'Amiri', serif",
                 fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
                 fontWeight: 300,
-                background: 'linear-gradient(135deg, #7A602B, #BFA267, #E8D5A3)',
+                background: 'linear-gradient(135deg, #C9A84C, #F0D98C, #C9A84C)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -158,7 +157,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
             <div className="section-divider" />
             <p
               className="mt-6 max-w-xl mx-auto leading-relaxed font-medium"
-              style={{ fontFamily: "'Amiri', serif", color: '#444444', fontStyle: 'italic', fontSize: 'clamp(1.15rem, 2.8vw, 1.35rem)' }}
+              style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontSize: 'clamp(1.15rem, 2.8vw, 1.35rem)' }}
             >
               امسح الكود بكاميرا موبايلك عشان يظهرلك كارت الدعوة الخاص بيك مع كل التفاصيل ❤️
             </p>
@@ -172,31 +171,31 @@ const QRCodeSection = ({ onMusicTrigger }) => {
             transition={{ duration: 0.8 }}
             className="p-8 sm:p-12 rounded-3xl relative mx-auto max-w-xl text-center overflow-hidden"
             style={{
-              background: 'rgba(255, 255, 255, 0.78)',
-              border: '1px solid rgba(255, 255, 255, 0.95)',
-              boxShadow: '0 20px 50px -15px rgba(191,162,103,0.12), 0 0 0 1px rgba(191,162,103,0.12)',
+              background: 'rgba(255, 255, 255, 0.82)',
+              border: '1px solid rgba(201, 168, 76, 0.4)',
+              boxShadow: '0 20px 50px -15px rgba(201,168,76,0.18)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
             }}
           >
             {/* Inner dashed frame */}
-            <div className="absolute inset-3 rounded-2xl border border-dashed border-[#BFA267]/25 pointer-events-none" />
+            <div className="absolute inset-3 rounded-2xl border border-dashed border-[#C9A84C]/35 pointer-events-none" />
 
             {/* Floral Corners */}
-            <FloralCorner position="top-right" opacity={0.35} />
-            <FloralCorner position="bottom-left" opacity={0.35} />
+            <FloralCorner position="top-right" opacity={0.4} />
+            <FloralCorner position="bottom-left" opacity={0.4} />
 
             <div className="relative z-10 flex flex-col items-center">
               {/* Mode Switcher */}
               <div
                 className="inline-flex p-1 rounded-full mb-8"
-                style={{ background: 'rgba(191,162,103,0.1)', border: '1px solid rgba(191,162,103,0.25)' }}
+                style={{ background: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.3)' }}
               >
                 <button
                   type="button"
                   onClick={() => setQrMode('url')}
                   className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                    qrMode === 'url' ? 'bg-[#BFA267] text-white shadow-md' : 'text-[#7A602B] hover:text-[#BFA267]'
+                    qrMode === 'url' ? 'bg-[#C9A84C] text-white shadow-md' : 'text-[#8B6914] hover:text-[#C9A84C]'
                   }`}
                 >
                   كارت الدعوة التفاعلي ✨
@@ -205,7 +204,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
                   type="button"
                   onClick={() => setQrMode('text')}
                   className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                    qrMode === 'text' ? 'bg-[#BFA267] text-white shadow-md' : 'text-[#7A602B] hover:text-[#BFA267]'
+                    qrMode === 'text' ? 'bg-[#C9A84C] text-white shadow-md' : 'text-[#8B6914] hover:text-[#C9A84C]'
                   }`}
                 >
                   نص الدعوة المباشر 📝
@@ -217,8 +216,8 @@ const QRCodeSection = ({ onMusicTrigger }) => {
                 className="p-5 rounded-2xl mb-6 relative group inline-block"
                 style={{
                   background: '#FFFFFF',
-                  boxShadow: '0 10px 30px rgba(191,162,103,0.15)',
-                  border: '1.5px solid rgba(191,162,103,0.35)',
+                  boxShadow: '0 10px 30px rgba(201,168,76,0.2)',
+                  border: '1.5px solid rgba(201,168,76,0.4)',
                 }}
               >
                 <QRCodeCanvas
@@ -233,7 +232,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
               </div>
 
               {/* QR instructions */}
-              <p className="text-sm sm:text-base font-semibold mb-6" style={{ color: '#7A602B' }}>
+              <p className="text-sm sm:text-base font-semibold mb-6" style={{ color: '#8B6914' }}>
                 {qrMode === 'url'
                   ? 'وجه كاميرا هاتفك نحو الكود لفتح بطاقة الدعوة الفاخرة'
                   : 'وجه الكاميرا لقراءة نص بطاقة الدعوة فوراً'}
@@ -257,9 +256,9 @@ const QRCodeSection = ({ onMusicTrigger }) => {
                   onClick={handleDownload}
                   className="px-6 py-3 rounded-full text-sm sm:text-base font-bold cursor-pointer flex items-center gap-2 transition-all duration-300"
                   style={{
-                    background: 'rgba(191,162,103,0.12)',
-                    color: '#7A602B',
-                    border: '1px solid rgba(191,162,103,0.4)',
+                    background: 'rgba(201,168,76,0.15)',
+                    color: '#8B6914',
+                    border: '1px solid rgba(201,168,76,0.4)',
                   }}
                 >
                   <span>تحميل الـ QR للطباعة</span>
@@ -308,25 +307,25 @@ const QRCodeSection = ({ onMusicTrigger }) => {
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
               className="relative w-full max-w-lg rounded-3xl p-8 sm:p-10 my-auto text-center overflow-hidden z-10"
               style={{
-                background: 'linear-gradient(160deg, #FFFFFF 0%, #FAF9F5 60%, #F3EFE8 100%)',
-                border: '1.5px solid rgba(191,162,103,0.45)',
-                boxShadow: '0 25px 70px rgba(0,0,0,0.25), 0 0 40px rgba(191,162,103,0.18)',
+                background: 'linear-gradient(160deg, #FFFFFF 0%, #F2ECD9 60%, #E8DFCA 100%)',
+                border: '1.5px solid rgba(201,168,76,0.5)',
+                boxShadow: '0 25px 70px rgba(0,0,0,0.25), 0 0 40px rgba(201,168,76,0.2)',
               }}
             >
               {/* Close Button */}
               <button
                 onClick={() => setShowModal(false)}
                 className="absolute top-5 left-5 w-9 h-9 rounded-full flex items-center justify-center text-lg cursor-pointer transition-all hover:bg-black/5"
-                style={{ color: '#7A602B', border: '1px solid rgba(191,162,103,0.3)' }}
+                style={{ color: '#8B6914', border: '1px solid rgba(201,168,76,0.35)' }}
                 aria-label="إغلاق"
               >
                 ✕
               </button>
 
               {/* Decorative Frame */}
-              <div className="absolute inset-3 rounded-2xl border border-dashed border-[#BFA267]/30 pointer-events-none" />
-              <FloralCorner position="top-right" opacity={0.4} />
-              <FloralCorner position="bottom-left" opacity={0.4} />
+              <div className="absolute inset-3 rounded-2xl border border-dashed border-[#C9A84C]/35 pointer-events-none" />
+              <FloralCorner position="top-right" opacity={0.45} />
+              <FloralCorner position="bottom-left" opacity={0.45} />
 
               <div className="relative z-10">
                 {/* Crown / Seal */}
@@ -336,25 +335,25 @@ const QRCodeSection = ({ onMusicTrigger }) => {
                   transition={{ delay: 0.2, type: 'spring' }}
                   className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center text-3xl shadow-inner"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(191,162,103,0.18), rgba(232,213,163,0.35))',
-                    border: '1px solid rgba(191,162,103,0.4)',
+                    background: 'linear-gradient(135deg, rgba(201,168,76,0.2), rgba(240,217,140,0.4))',
+                    border: '1px solid rgba(201,168,76,0.4)',
                   }}
                 >
                   👑
                 </motion.div>
 
-                <p className="text-xs uppercase tracking-[0.35em] mb-2 font-bold" style={{ color: '#7A602B' }}>
+                <p className="text-xs uppercase tracking-[0.35em] mb-2 font-bold" style={{ color: '#8B6914' }}>
                   ✦ بطاقة دعوة خاصة ✦
                 </p>
 
                 <h3
                   className="text-2xl sm:text-3xl font-bold mb-3"
-                  style={{ fontFamily: "'Amiri', serif", color: '#7A602B' }}
+                  style={{ fontFamily: "'Amiri', serif", color: '#8B6914' }}
                 >
                   أهلاً بك يا غالي في ليلة العمر!
                 </h3>
 
-                <p className="text-base sm:text-lg mb-4 text-[#444444] font-medium" style={{ fontFamily: "'Amiri', serif" }}>
+                <p className="text-base sm:text-lg mb-4 text-[#2C2C2C] font-medium" style={{ fontFamily: "'Amiri', serif" }}>
                   يسعدنا ويشرفنا دعوتكم لحضور حفل زفاف
                 </p>
 
@@ -362,16 +361,16 @@ const QRCodeSection = ({ onMusicTrigger }) => {
                 <div
                   className="py-3 px-6 rounded-2xl my-4 mx-auto max-w-xs shadow-sm"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(191,162,103,0.15), rgba(232,213,163,0.25))',
-                    border: '1px solid rgba(191,162,103,0.35)',
+                    background: 'linear-gradient(135deg, rgba(201,168,76,0.18), rgba(240,217,140,0.3))',
+                    border: '1px solid rgba(201,168,76,0.4)',
                   }}
                 >
                   <h2
                     className="text-3xl sm:text-4xl font-bold"
                     style={{
                       fontFamily: "'Amiri', serif",
-                      color: '#7A602B',
-                      textShadow: '0 2px 10px rgba(191,162,103,0.2)',
+                      color: '#8B6914',
+                      textShadow: '0 2px 10px rgba(201,168,76,0.25)',
                     }}
                   >
                     {weddingData.coupleNames}
@@ -379,7 +378,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
                 </div>
 
                 {/* Details highlights */}
-                <div className="space-y-2 my-5 text-sm sm:text-base text-[#333]">
+                <div className="space-y-2 my-5 text-sm sm:text-base text-[#2C2C2C]">
                   <div className="flex items-center justify-center gap-2">
                     <span className="text-lg">📅</span>
                     <span className="font-semibold">{weddingData.event.dateFormatted}</span>
@@ -396,7 +395,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
 
                 <p
                   className="text-base sm:text-lg italic mb-6 font-medium"
-                  style={{ fontFamily: "'Amiri', serif", color: '#7A602B' }}
+                  style={{ fontFamily: "'Amiri', serif", color: '#8B6914' }}
                 >
                   "فرحتنا مش هتكمل غير بوجودكم ولمتنا الحلوة ❤️"
                 </p>
@@ -418,7 +417,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="w-full sm:w-auto px-6 py-3 rounded-full font-bold text-sm sm:text-base cursor-pointer text-[#7A602B] bg-[#BFA267]/15 border border-[#BFA267]/45 hover:bg-[#BFA267]/25 transition-all text-center"
+                    className="w-full sm:w-auto px-6 py-3 rounded-full font-bold text-sm sm:text-base cursor-pointer text-[#8B6914] bg-[#C9A84C]/15 border border-[#C9A84C]/45 hover:bg-[#C9A84C]/25 transition-all text-center"
                   >
                     موقع القاعة 📍
                   </motion.a>
@@ -427,7 +426,7 @@ const QRCodeSection = ({ onMusicTrigger }) => {
                 <div className="mt-5">
                   <button
                     onClick={handleEnterFromModal}
-                    className="text-xs sm:text-sm text-neutral-500 hover:text-[#7A602B] underline underline-offset-4 cursor-pointer transition-colors"
+                    className="text-xs sm:text-sm text-neutral-500 hover:text-[#8B6914] underline underline-offset-4 cursor-pointer transition-colors"
                   >
                     تصفح الدعوة الكاملة 🌟
                   </button>
@@ -442,4 +441,3 @@ const QRCodeSection = ({ onMusicTrigger }) => {
 };
 
 export default QRCodeSection;
-

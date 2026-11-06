@@ -17,27 +17,26 @@ const CountdownUnit = ({ value, label, prevValue }) => {
       <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32">
         {/* Spinning dashed outer ring */}
         <svg className="absolute inset-0 w-full h-full animate-spin-slow opacity-30" viewBox="0 0 128 128">
-          <circle cx="64" cy="64" r="56" fill="none" stroke="#BFA267" strokeWidth="0.5" strokeDasharray="4 8" />
+          <circle cx="64" cy="64" r="56" fill="none" stroke="#C9A84C" strokeWidth="0.5" strokeDasharray="4 8" />
         </svg>
         {/* Static inner ring with dots */}
-        <svg className="absolute inset-0 w-full h-full opacity-40" viewBox="0 0 128 128"
+        <svg className="absolute inset-0 w-full h-full opacity-50" viewBox="0 0 128 128"
           style={{ transform: 'rotate(45deg)' }}>
-          <circle cx="64" cy="64" r="48" fill="none" stroke="#BFA267" strokeWidth="0.8" />
-          <circle cx="64" cy="16" r="2.5" fill="#BFA267" />
-          <circle cx="64" cy="112" r="2.5" fill="#BFA267" />
-          <circle cx="16" cy="64" r="2.5" fill="#BFA267" />
-          <circle cx="112" cy="64" r="2.5" fill="#BFA267" />
+          <circle cx="64" cy="64" r="48" fill="none" stroke="#C9A84C" strokeWidth="0.8" />
+          <circle cx="64" cy="16" r="3" fill="#C9A84C" />
+          <circle cx="64" cy="112" r="3" fill="#C9A84C" />
+          <circle cx="16" cy="64" r="3" fill="#C9A84C" />
+          <circle cx="112" cy="64" r="3" fill="#C9A84C" />
         </svg>
         {/* Number */}
         <div
           className="absolute inset-0 rounded-full flex items-center justify-center"
           style={{
-            background: 'rgba(255, 255, 255, 0.82)',
-            backdropFilter: 'blur(16px)',
-            border: '1px solid rgba(191,162,103,0.35)',
+            background: 'radial-gradient(ellipse, rgba(201,168,76,0.08) 0%, rgba(255,255,255,0.95) 80%)',
+            border: '1px solid rgba(201,168,76,0.4)',
             boxShadow: changed
-              ? '0 0 25px rgba(191,162,103,0.35)'
-              : '0 4px 20px rgba(191,162,103,0.1)',
+              ? '0 0 30px rgba(201,168,76,0.5)'
+              : '0 0 15px rgba(201,168,76,0.2)',
             transition: 'box-shadow 0.3s ease',
           }}
         >
@@ -52,7 +51,8 @@ const CountdownUnit = ({ value, label, prevValue }) => {
                 fontFamily: "'Amiri', serif",
                 fontSize: 'clamp(1.8rem, 5vw, 2.8rem)',
                 fontWeight: 300,
-                color: '#7A602B',
+                color: '#8B6914',
+                filter: 'drop-shadow(0 0 10px rgba(201,168,76,0.3))',
                 lineHeight: 1,
               }}
             >
@@ -63,7 +63,7 @@ const CountdownUnit = ({ value, label, prevValue }) => {
       </div>
 
       {/* Label */}
-      <span className="text-xs sm:text-sm uppercase tracking-[0.2em]" style={{ color: '#7A602B', fontWeight: 600 }}>
+      <span className="text-xs sm:text-sm uppercase tracking-[0.2em]" style={{ color: '#8B6914', fontWeight: 600 }}>
         {label}
       </span>
     </motion.div>
@@ -100,14 +100,14 @@ const Countdown = () => {
     <section
       id="countdown"
       className="relative py-28 sm:py-36 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, #F3EFE8 0%, #FAF9F5 50%, #F3EFE8 100%)' }}
+      style={{ background: 'linear-gradient(180deg, #E8DFCA 0%, #F2ECD9 50%, #E8DFCA 100%)' }}
     >
       {/* Large decorative bg rings */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ opacity: 0.04 }}>
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ opacity: 0.03 }}>
         <svg viewBox="0 0 800 800" width="100%" height="100%" style={{ maxWidth: '800px' }}>
-          <circle cx="400" cy="400" r="350" fill="none" stroke="#BFA267" strokeWidth="1" strokeDasharray="10 15" />
-          <circle cx="400" cy="400" r="280" fill="none" stroke="#BFA267" strokeWidth="0.5" />
-          <circle cx="400" cy="400" r="200" fill="none" stroke="#BFA267" strokeWidth="1" strokeDasharray="5 10" />
+          <circle cx="400" cy="400" r="350" fill="none" stroke="#C9A84C" strokeWidth="1" strokeDasharray="10 15" />
+          <circle cx="400" cy="400" r="280" fill="none" stroke="#C9A84C" strokeWidth="0.5" />
+          <circle cx="400" cy="400" r="200" fill="none" stroke="#C9A84C" strokeWidth="1" strokeDasharray="5 10" />
         </svg>
       </div>
 
@@ -120,16 +120,16 @@ const Countdown = () => {
           transition={{ duration: 0.9 }}
           className="text-center mb-20 sm:mb-24"
         >
-          <p className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: '#7A602B', fontWeight: 600 }}>
+          <p className="text-sm uppercase tracking-[0.3em] mb-4" style={{ color: '#8B6914', fontWeight: 600 }}>
             ✦ بنعد الأيام ✦
           </p>
           <h2
-            className="mb-4"
+            className="mb-5"
             style={{
               fontFamily: "'Amiri', serif",
               fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
               fontWeight: 300,
-              background: 'linear-gradient(135deg, #7A602B, #BFA267, #E8D5A3)',
+              background: 'linear-gradient(135deg, #C9A84C, #F0D98C, #C9A84C)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -138,7 +138,7 @@ const Countdown = () => {
             هانت خلاص
           </h2>
           <div className="section-divider" />
-          <p className="mt-6" style={{ fontFamily: "'Amiri', serif", color: '#444444', fontStyle: 'italic', fontWeight: 500, fontSize: '1.3rem' }}>
+          <p className="mt-6" style={{ fontFamily: "'Amiri', serif", color: '#2C2C2C', fontStyle: 'italic', fontWeight: 500, fontSize: '1.3rem' }}>
             لحد ما تبدأ أجمل ليلة في عمرنا
           </p>
         </motion.div>
@@ -153,7 +153,7 @@ const Countdown = () => {
                   animate={{ opacity: [1, 0.2, 1] }}
                   transition={{ duration: 1, repeat: Infinity }}
                   className="text-2xl sm:text-3xl hidden sm:block self-start mt-10"
-                  style={{ color: '#7A602B' }}
+                  style={{ color: '#8B6914' }}
                 >
                   :
                 </motion.span>

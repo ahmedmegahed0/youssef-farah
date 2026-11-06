@@ -21,7 +21,7 @@ function App() {
   return (
     <div
       className="min-h-screen"
-      style={{ background: '#FAF9F5', color: '#222222', fontFamily: "'Cairo', sans-serif" }}
+      style={{ background: '#F2ECD9', color: '#2C2C2C', fontFamily: "'Cairo', sans-serif" }}
     >
       <Particles />
 

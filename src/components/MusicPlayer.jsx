@@ -67,17 +67,17 @@ const MusicPlayer = ({ musicStarted }) => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         title={playing ? 'وقف الموسيقى' : 'شغل الموسيقى'}
-        className="relative w-14 h-14 rounded-full flex items-center justify-center cursor-pointer shadow-lg"
+        className="relative w-14 h-14 rounded-full flex items-center justify-center cursor-pointer"
         style={{
-          background: 'linear-gradient(135deg, #BFA267, #E8D5A3)',
-          boxShadow: playing ? '0 0 25px rgba(191,162,103,0.5), 0 0 50px rgba(191,162,103,0.2)' : '0 4px 20px rgba(191,162,103,0.25)',
+          background: 'linear-gradient(135deg, #C9A84C, #F0D98C)',
+          boxShadow: playing ? '0 0 30px rgba(201,168,76,0.6), 0 0 60px rgba(201,168,76,0.2)' : '0 0 20px rgba(201,168,76,0.3)',
         }}
       >
         <motion.div
           animate={playing ? { rotate: 360 } : { rotate: 0 }}
           transition={playing ? { duration: 3, repeat: Infinity, ease: 'linear' } : {}}
           className="absolute inset-1 rounded-full"
-          style={{ background: 'conic-gradient(#7A602B 0deg, #BFA267 60deg, #7A602B 120deg, #BFA267 180deg, #7A602B 240deg, #BFA267 300deg, #7A602B 360deg)', opacity: 0.25 }}
+          style={{ background: 'conic-gradient(#8B6914 0deg, #C9A84C 60deg, #8B6914 120deg, #C9A84C 180deg, #8B6914 240deg, #C9A84C 300deg, #8B6914 360deg)', opacity: 0.3 }}
         />
         <span className="relative z-10 text-xl">{error ? '🔇' : playing ? '⏸' : '▶'}</span>
 
@@ -85,7 +85,7 @@ const MusicPlayer = ({ musicStarted }) => {
           {playing && !error && [1, 2, 3].map(i => (
             <motion.div key={i}
               className="absolute inset-0 rounded-full border"
-              style={{ borderColor: 'rgba(191,162,103,0.4)' }}
+              style={{ borderColor: 'rgba(201,168,76,0.4)' }}
               initial={{ scale: 1, opacity: 0.6 }}
               animate={{ scale: 1 + i * 0.4, opacity: 0 }}
               transition={{ duration: 2, delay: i * 0.4, repeat: Infinity, ease: 'easeOut' }}
@@ -94,8 +94,8 @@ const MusicPlayer = ({ musicStarted }) => {
         </AnimatePresence>
       </motion.button>
 
-      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs px-2.5 py-1 rounded-full pointer-events-none shadow-md"
-        style={{ background: 'rgba(34,34,34,0.85)', backdropFilter: 'blur(8px)', color: '#FAF9F5', border: '1px solid rgba(191,162,103,0.25)' }}>
+      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs px-2 py-1 rounded-full pointer-events-none"
+        style={{ background: 'rgba(12,9,4,0.9)', color: '#C9A84C', border: '1px solid rgba(201,168,76,0.2)' }}>
         {playing ? 'وقف ⏸' : 'شغل ▶'}
       </div>
     </motion.div>
